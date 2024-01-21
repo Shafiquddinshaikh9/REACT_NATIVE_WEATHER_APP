@@ -26,7 +26,7 @@ export default function App() {
   useEffect(() => {
     getWeatherData("Mumbai");
     console.log(weatherData, "weather data");
-  }, []);
+  }, [weatherData]);
 
   if (!loaded) {
     return (

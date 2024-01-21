@@ -5,10 +5,10 @@ import {
   Text,
   View,
 } from "react-native";
-import React from "react";
-import { haze, sunny, snow, rainy } from "../../assets/backgoundImg/index";
-import { useEffect, useState } from "react/cjs/react.production.min";
+import React, { useEffect, useState } from "react";
+import { haze, sunny, snow, rainy } from "../../assets/backgoundImg/index.js";
 const Weather = ({ weatherData }) => {
+  console.log(weatherData, "wPage");
   const [backgroundImage, setBackGroundImage] = useState(null);
   const {
     weather,
@@ -39,7 +39,6 @@ const Weather = ({ weatherData }) => {
 };
 
 export default Weather;
-r;
 
 const styles = StyleSheet.create({
   container: {
