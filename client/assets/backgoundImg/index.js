@@ -1,6 +1,6 @@
-const haze = require("./img/haze.jpg");
-const rainy = require("./img/rainy.jpg");
-const snow = require("./img/snow.jpg");
-const sunny = require("./img/sunny.jpg");
+const haze = require("./imgs/haze.jpg");
+const rainy = require("./imgs/rainy.jpg");
+const snow = require("./imgs/snow.jpg");
+const sunny = require("./imgs/sunny.jpg");
 
-export { haze, rainy, snow, sunny };
+export default { haze, rainy, snow, sunny };

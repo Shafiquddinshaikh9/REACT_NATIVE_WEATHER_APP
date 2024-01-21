@@ -39,7 +39,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Weather />
+      <Weather weatherData={weatherData} />
     </View>
   );
 }
