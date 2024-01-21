@@ -1,12 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
-import Weather from "./src/components/Weather";
+import Weather from "./src/components/Weather.js";
+import SearchBar from "./src/components/SearchBar.js";
 export default function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [loaded, setLoaded] = useState(true);
 
-  const getWeatherData = async (cityname) => {
+  const fetchWeatherData = async (cityName) => {
     setLoaded(false);
     const key = "4c5ae875bc205854d459d7c55dd3b507";
     const api = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${key}`;
@@ -14,6 +15,7 @@ export default function App() {
       const res = await fetch(api);
       if (res.status == 200) {
         const data = await res.json();
+        console.log(data);
         setWeatherData(data);
       } else {
         setWeatherData(null);
@@ -24,22 +26,30 @@ export default function App() {
   };
 
   useEffect(() => {
-    getWeatherData("Mumbai");
+    fetchWeatherData("Mumbai");
     console.log(weatherData, "weather data");
-  }, [weatherData]);
+  }, []);
 
   if (!loaded) {
     return (
-      <View>
+      <View style={styles.container}>
         <ActivityIndicator color="gray" size={36} />
       </View>
     );
   } else if (weatherData == null) {
+    return (
+      <View style={styles.container}>
+        <SearchBar fetchWeatherData={fetchWeatherData} />
+        <Text style={styles.primaryText}>
+          City Not Found! Try Different City
+        </Text>
+      </View>
+    );
   }
 
   return (
     <View style={styles.container}>
-      <Weather weatherData={weatherData} />
+      <Weather weatherData={weatherData} fetchWeatherData={fetchWeatherData} />
     </View>
   );
 }
@@ -50,5 +60,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  primaryText: {
+    margin: 20,
+    fontSize: 28,
   },
 });
